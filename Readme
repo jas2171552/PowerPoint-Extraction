@@ -1,20 +1,10 @@
-I did not write this script.  I altered the script found here: https://gist.github.com/tiwo/f3900653855132c8d26377394a9c29b4 to meet my needs
+Disclaimer: I did not write this script.  I altered the script found here: https://gist.github.com/tiwo/f3900653855132c8d26377394a9c29b4 to meet my needs
 
-Set output file variable to where you want the JPG or PNG files saves
-Set the output format:  
-   num_exported = ExportSlides(arg, "JPG", 3) for JPEG 
-   or 
-   num_exported = ExportSlides(arg, "PNG", 3) for PNG
+Purpose:  This VBS, when executed, will take a user specified PowerPoint (.pptx) and copy each slide individually to a destination 
+folder as directed as either a .PNG or .JPG format.
 
-To unpack the PPT , drag the PPT file on top of the VB scrip.  It will automatically execute and save the slides.  There will be a notification
-
-
-export a Powerpoint presentation to JPEG images, one per slide. Used as a workaround to the broken JPEG export in Powerpoint itself, which yields only low quality images.
+Use: double click the executable file.  It will ask for a filepath and file name of the PowerPoint (no need to add the extension).  It will
+also ask the user to enter  1 for PNG or 2 for JPEG output.  A selection other than this will default to PNG.  If the file does not exist
+and message box will be displayyed saying as much.
 
 
-Usage
-You can adjust the image resolution by varying the numerical argument in line 46, in the call to ExportSlides.
-
-Just drag and drop one or more PPT or PPTX files onto the vbs script. The script will process each, showing a short message, and create Image files named like example.pptx-0001.jpg.
-
-From the command line, call cscript ppt2jpeg.vbs [example.pptx] [next.pptx] ....

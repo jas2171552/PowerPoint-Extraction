@@ -1,23 +1,9 @@
-Function FormatNumberLeadingZeroes(expr, digits)
-    remain = expr
-
-    Do 
-      result = CStr(remain mod 10) & result
-      remain = remain \ 10
-    Loop Until (remain = 0) and (Len(result) >= digits)
-
-  FormatNumberLeadingZeroes = result
-End Function
-
-
-function ExportSlides(ppt_file, out_format, megapixels)
-
   Set pptApp = CreateObject("PowerPoint.Application")
   Set ppt = pptApp.Presentations.Open(ppt_file, True, , False)
 
-  zOutput = "\\example\subfolder\xxxx\"
-  Output = "X:\Tableau Dashboard\Tableau Image Repository\xxxxx\xxxx\"
-  
+  zOutput = "\\jtclpswermfs01.lpsvcs.com\ERM\_Projects\Tableau\Images\Compliance\Export\"
+  Output = "X:\Tableau Dashboard\Tableau Image Repository\ERC Deck\Compliance\"
+
   With ppt.PageSetup
     sh = .SlideHeight
     sw = .SlideWidth
@@ -36,7 +22,6 @@ function ExportSlides(ppt_file, out_format, megapixels)
         out_format, _
         imagewidth, imageheight
 
-
     num_exported = num_exported + 1
 
 
@@ -45,8 +30,31 @@ function ExportSlides(ppt_file, out_format, megapixels)
   ExportSlides = num_exported
 End Function
 
-For Each arg in Wscript.Arguments 
-  ' adjust megapixels here in the last argument:
-  num_exported = ExportSlides(arg, "JPG", 3)
-  WScript.Echo "Done with ", arg, ". ", num_exported, " slides exported."
-Next
+
+
+
+filePath = InputBox("Enter the filepath for the PowerPoint you wish to export")
+fileName = InputBox("Enter the filename for the PowerPoint you wish to export")
+fullFilePate = filePath & "\" & fileName & ".pptx"
+
+s = InputBox("Please select the file output type for the slides" & _
+         vbCrLf & vbTab & "1 - PNG" & _
+         vbCrLf & vbTab & "2 - JPG", "Option Chooser")
+
+Select Case s
+     Case "1"
+         outputType = "PNG"
+     Case "2"
+         outputType = "JPG"
+     Case Else
+         FolderChooser = "PNG"
+End Select
+
+
+Set fso = CreateObject("Scripting.FileSystemObject")
+If fso.FileExists(fullFilePate) Then
+   num_exported = ExportSlides(fullFilePate, outputType , 3)
+   WScript.Echo "Done with ", fileName, ". ", num_exported, " slides exported."
+Else
+  MsgBox("File does not exist")
+End If

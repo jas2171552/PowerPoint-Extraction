@@ -1,7 +1,6 @@
   Set pptApp = CreateObject("PowerPoint.Application")
   Set ppt = pptApp.Presentations.Open(ppt_file, True, , False)
 
-  zOutput = "\\jtclpswermfs01.lpsvcs.com\ERM\_Projects\Tableau\Images\Compliance\Export\"
   Output = "X:\Tableau Dashboard\Tableau Image Repository\ERC Deck\Compliance\"
 
   With ppt.PageSetup
@@ -35,7 +34,7 @@ End Function
 
 filePath = InputBox("Enter the filepath for the PowerPoint you wish to export")
 fileName = InputBox("Enter the filename for the PowerPoint you wish to export")
-fullFilePate = filePath & "\" & fileName & ".pptx"
+fullFilePath = filePath & "\" & fileName & ".pptx"
 
 s = InputBox("Please select the file output type for the slides" & _
          vbCrLf & vbTab & "1 - PNG" & _
@@ -52,8 +51,8 @@ End Select
 
 
 Set fso = CreateObject("Scripting.FileSystemObject")
-If fso.FileExists(fullFilePate) Then
-   num_exported = ExportSlides(fullFilePate, outputType , 3)
+If fso.FileExists(fullFilePath) Then
+   num_exported = ExportSlides(fullFilePath, outputType , 3)
    WScript.Echo "Done with ", fileName, ". ", num_exported, " slides exported."
 Else
   MsgBox("File does not exist")
